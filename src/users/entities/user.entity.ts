@@ -1,3 +1,4 @@
+import { Avis } from "src/avis/entities/avis.entity";
 import { Restaurant } from "src/restaurant/entities/restaurant.entity";
 import { Ville } from "src/ville/entities/ville.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -20,4 +21,6 @@ export class User {
     restaurants: Restaurant[]
     @ManyToOne(() => Ville, (ville) => ville.users)
     ville: Ville;
+    @OneToMany(() => Avis, (avis) => avis.user)
+    avis: Avis[]
 }

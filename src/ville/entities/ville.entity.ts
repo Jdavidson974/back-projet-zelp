@@ -6,7 +6,7 @@ import { PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, Entity } from "ty
 export class Ville {
     @PrimaryGeneratedColumn()
     id: number
-    @Column({ unique: true })
+    @Column()
     name: string;
     @Column()
     cp: string;
