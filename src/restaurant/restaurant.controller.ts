@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { RestaurantService } from './restaurant.service';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
+import { Public } from 'src/shared/decorators/public.decorator';
 
 @Controller('restaurant')
 export class RestaurantController {
@@ -12,7 +13,7 @@ export class RestaurantController {
     return this.restaurantService.create(createRestaurantDto);
   }
 
-
+  @Public()
   @Get()
   findAll() {
     return this.restaurantService.findAll();
