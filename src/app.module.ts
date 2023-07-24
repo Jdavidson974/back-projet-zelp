@@ -8,6 +8,9 @@ import { UsersModule } from './users/users.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/guards/auth/auth.guard';
 import { SharedModule } from './shared/shared.module';
+import { RestaurantModule } from './restaurant/restaurant.module';
+import { AvisModule } from './avis/avis.module';
+import { VilleModule } from './ville/ville.module';
 
 
 @Module({
@@ -20,7 +23,7 @@ import { SharedModule } from './shared/shared.module';
     database: process.env.DB_NAME,
     synchronize: true,
     autoLoadEntities: true
-  }), AuthModule, UsersModule, SharedModule],
+  }), AuthModule, UsersModule, SharedModule, RestaurantModule, AvisModule, VilleModule],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_GUARD,

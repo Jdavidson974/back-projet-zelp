@@ -9,7 +9,7 @@ export class User {
     @Column()
     password: string;
     @Column()
-    role: string;
+    role: "admin" | "restaurateur" | "client";
     @Column()
     firstname: string;
     @Column()
