@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -40,20 +40,27 @@ export class UsersService {
   }
 
   createAndLogin(newUser: RegisterDto) {
-    return this.villeRepo.findOneByOrFail({ id: +newUser.ville }).then(
-      ville => {
-        return bcrypt.genSalt().then(
-          salt => {
-            return bcrypt.hash(newUser.password, salt).then(
-              hash => {
-                const user: User = this.userRepo.create({ ...newUser, ville: ville, password: hash });
-                return this.userRepo.save(user)
-              }
-            )
-          }
-        );
+    return this.userRepo.findOne({ where: { email: newUser.email } }).then(user => {
+      if (user) {
+        throw new HttpException("user existant", HttpStatus.FORBIDDEN)
       }
-    )
+      return this.villeRepo.findOneByOrFail({ id: +newUser.ville }).then(
+        ville => {
+          return bcrypt.genSalt().then(
+            salt => {
+              return bcrypt.hash(newUser.password, salt).then(
+                hash => {
+                  const user: User = this.userRepo.create({ ...newUser, ville: ville, password: hash });
+                  return this.userRepo.save(user)
+                }
+              )
+            }
+          );
+        }, error => {
+          throw new HttpException('no ville', HttpStatus.FORBIDDEN)
+        }
+      )
+    })
   }
 
   createInitUser() {

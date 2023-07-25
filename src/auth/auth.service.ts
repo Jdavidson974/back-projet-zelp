@@ -41,7 +41,14 @@ export class AuthService {
 
     registerAndLogin(data: RegisterDto): Promise<any> {
         return this.usersService.createAndLogin(data).then(newUser => {
-            return this.signIn(newUser.email, data.password)
+            console.log(newUser);
+            if (newUser) {
+                return this.signIn(newUser.email, data.password)
+            }
+        }, erreur => {
+            console.log(erreur.response);
+
+            throw new HttpException(erreur.response, HttpStatus.BAD_REQUEST)
         })
     }
 }
