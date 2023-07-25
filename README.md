@@ -28,46 +28,26 @@
 
 ## Installation
 
+Installer le CLI de NESTJS en éxécutant la commande suivante.
+
+```bash
+$  npm i -g @nestjs/cli
+```
+
+Une fois fait , récuperer le projet et lancer cette commande à la racine du projet pour importer les dépendances.
+
 ```bash
 $ npm install
 ```
 
-## Running the app
+A la racine du projet il y a un fichier SQL pour la db.
+Pour importer la base de donnée suivez les étapes suivante.
+
+1. créer une base de donnée nommé "zelp".
+2. executer le script du fichier zelp.sql sur la db zelp créer dans l'étape 1
+
+Si il n'y a pas d'erreur il ne vous reste plus qu'a lancer NestJs avec la commande suivante.
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+$ nest start --watch
 ```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
