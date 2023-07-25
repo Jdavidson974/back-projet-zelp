@@ -2,16 +2,18 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { VilleService } from './ville.service';
 import { CreateVilleDto } from './dto/create-ville.dto';
 import { UpdateVilleDto } from './dto/update-ville.dto';
+import { Public } from 'src/shared/decorators/public.decorator';
 
 @Controller('ville')
 export class VilleController {
-  constructor(private readonly villeService: VilleService) {}
+  constructor(private readonly villeService: VilleService) { }
 
   @Post()
   create(@Body() createVilleDto: CreateVilleDto) {
     return this.villeService.create(createVilleDto);
   }
 
+  @Public()
   @Get()
   findAll() {
     return this.villeService.findAll();

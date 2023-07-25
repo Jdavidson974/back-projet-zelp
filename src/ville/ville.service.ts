@@ -21,7 +21,6 @@ export class VilleService {
               name: "Sainte Suzanne",
               restaurants: [],
               users: []
-
             },
             {
               id: 2,
@@ -37,7 +36,6 @@ export class VilleService {
               name: "Saint Denis",
               restaurants: [],
               users: []
-
             },
             {
               id: 4,
@@ -45,7 +43,6 @@ export class VilleService {
               name: "Bras Panon",
               restaurants: [],
               users: []
-
             },
             {
               id: 5,
@@ -61,7 +58,6 @@ export class VilleService {
               name: "Sainte-Marie",
               restaurants: [],
               users: []
-
             },
           ]
           this.villeRepo.save(ville);
@@ -75,7 +71,7 @@ export class VilleService {
   }
 
   findAll() {
-    return `This action returns all ville`;
+    return this.villeRepo.find();
   }
 
   findOne(id: number) {
