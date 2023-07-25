@@ -12,15 +12,17 @@ import { User } from './entities/user.entity';
 export class UsersModule implements OnModuleInit {
   constructor(private userService: UsersService) { }
   onModuleInit() {
-    this.userService.count().then(
-      haveUser => {
-        if (!haveUser) {
-          console.log("création des user");
-          this.userService.createInitUser()
-          this.userService.createInitAdmin();
-        }
-      }
-    )
+    // this.userService.count().then(
+    //   haveUser => {
+    //     if (!haveUser) {
+    //       console.log("création des users");
+    //       this.userService.createInitUser()
+    //       this.userService.createInitAdmin();
+    //     } else {
+    //       console.log("pas de création de users");
+    //     }
+    //   }
+    // )
 
   }
 

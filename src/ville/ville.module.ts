@@ -12,6 +12,6 @@ import { Ville } from './entities/ville.entity';
 export class VilleModule implements OnModuleInit {
   constructor(private villeService: VilleService) { }
   onModuleInit() {
-    this.villeService.initVille();
+    // this.villeService.initVille();
   }
 }

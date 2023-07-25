@@ -34,6 +34,7 @@ export class UsersService {
       }
     )
   }
+
   create(newUser: RegisterDto) {
     return bcrypt.genSalt().then(
       salt => {
@@ -87,6 +88,21 @@ export class UsersService {
 
   findAll() {
     return `This action returns all users`;
+  }
+
+  findAllRestaurateur() {
+    return this.userRepo.find({
+      where: {
+        role: 'restaurateur',
+      },
+    })
+  }
+  findAllClient() {
+    return this.userRepo.find({
+      where: {
+        role: 'client',
+      },
+    })
   }
 
   findOne(id: number) {

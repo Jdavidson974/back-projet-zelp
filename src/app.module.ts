@@ -22,7 +22,7 @@ import { VilleModule } from './ville/ville.module';
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     synchronize: true,
-    autoLoadEntities: true
+    autoLoadEntities: true,
   }), AuthModule, SharedModule, VilleModule, UsersModule, RestaurantModule, AvisModule],
   controllers: [AppController],
   providers: [AppService, {
