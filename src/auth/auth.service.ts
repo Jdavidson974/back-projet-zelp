@@ -19,7 +19,7 @@ export class AuthService {
                     return bcrypt.compare(pass, user.password).then(
                         match => {
                             if (match) {
-                                const payload = { username: user.email, sub: user.id };
+                                const payload = { username: user.email, sub: user.id, lastname: user.lastname, firstname: user.firstname, role: user.role };
                                 return this.jwtService.signAsync(payload).then(
                                     token => {
                                         return {
