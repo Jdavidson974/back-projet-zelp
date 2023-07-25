@@ -2,6 +2,7 @@ import { Body, Controller, Get, HttpCode, HttpException, HttpStatus, Post, Req, 
 import { AuthService } from './auth.service';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { Public } from 'src/shared/decorators/public.decorator';
+import { RegisterDto } from './dto/register.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -16,6 +17,12 @@ export class AuthController {
         } else {
             throw new HttpException(errorMsg, HttpStatus.FORBIDDEN)
         }
+    }
+    @Public()
+    @Post('register')
+    register(@Body() registerDto: RegisterDto) {
+        return this.authService.register(registerDto);
+
     }
 
     @Get('profile')

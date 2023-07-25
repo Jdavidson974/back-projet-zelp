@@ -23,7 +23,7 @@ import { VilleModule } from './ville/ville.module';
     database: process.env.DB_NAME,
     synchronize: true,
     autoLoadEntities: true
-  }), AuthModule, UsersModule, SharedModule, RestaurantModule, AvisModule, VilleModule],
+  }), AuthModule, SharedModule, VilleModule, UsersModule, RestaurantModule, AvisModule],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_GUARD,

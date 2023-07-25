@@ -5,10 +5,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { RegisterDto } from 'src/auth/dto/register.dto';
 @Injectable()
 export class UsersService {
   constructor(@InjectRepository(User) private userRepo: Repository<User>) { }
-  createInitUser() {
+  createInitAdmin() {
     const email: string = 'jd9743101@gmail.com';
     const password: string = 'Sautronjd974@';
     return bcrypt.genSalt().then(
@@ -33,8 +34,55 @@ export class UsersService {
       }
     )
   }
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  create(newUser: RegisterDto) {
+    return bcrypt.genSalt().then(
+      salt => {
+        return bcrypt.hash(newUser.password, salt).then(
+          hash => {
+            const user: User = this.userRepo.create({ email: newUser.email, password: hash, lastname: "SAUTRON", firstname: "Jean Davidson", role: "admin" });
+            return this.userRepo.save(user);
+          }
+        )
+      }
+    );
+  }
+
+  createInitUser() {
+    const users: any[] = [
+      {
+        id: 1,
+        email: "testa@gmail.com",
+        firstname: "test",
+        lastname: "test",
+        password: "test",
+        role: "client",
+      },
+      {
+        id: 2,
+        email: "testz@gmail.com",
+        firstname: "test",
+        lastname: "test",
+        password: "test",
+        role: "client",
+      },
+      {
+        id: 3,
+        email: "testb@gmail.com",
+        firstname: "test",
+        lastname: "test",
+        password: "test",
+        role: "restaurateur",
+      },
+      {
+        id: 4,
+        email: "testc@gmail.com",
+        firstname: "test",
+        lastname: "test",
+        password: "test",
+        role: "restaurateur",
+      },
+    ]
+    this.userRepo.save(users)
   }
 
   findAll() {

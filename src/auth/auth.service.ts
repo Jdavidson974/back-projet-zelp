@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
+import { RegisterDto } from './dto/register.dto';
 @Injectable()
 export class AuthService {
     constructor(
@@ -12,7 +13,6 @@ export class AuthService {
 
     signIn(email: string, pass: string): Promise<any> {
         const errorMsg = "Identifiant ou mot de passe incorect"
-
         return this.usersService.findOnebyEmail(email).then(
             user => {
                 if (user) {
@@ -37,5 +37,10 @@ export class AuthService {
                 }
             }
         );
+    }
+
+    // TODO REVOIR LES DATA 
+    register(data: RegisterDto): Promise<any> {
+        return this.usersService.create(data)
     }
 }

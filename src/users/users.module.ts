@@ -15,7 +15,9 @@ export class UsersModule implements OnModuleInit {
     this.userService.count().then(
       haveUser => {
         if (!haveUser) {
-          this.userService.createInitUser();
+          console.log("création des user");
+          this.userService.createInitUser()
+          this.userService.createInitAdmin();
         }
       }
     )
