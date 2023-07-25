@@ -3,6 +3,6 @@ export class RegisterDto {
     password: string;
     lastName: string;
     firstName: string;
-    villeId: number
-    type: 'client' | 'restaurateur';
+    ville: number
+    role: 'client' | 'restaurateur';
 }

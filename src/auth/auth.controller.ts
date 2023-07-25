@@ -21,8 +21,7 @@ export class AuthController {
     @Public()
     @Post('register')
     register(@Body() registerDto: RegisterDto) {
-        return this.authService.register(registerDto);
-
+        return this.authService.registerAndLogin(registerDto);
     }
 
     @Get('profile')

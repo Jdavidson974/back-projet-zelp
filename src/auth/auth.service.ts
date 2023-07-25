@@ -39,8 +39,9 @@ export class AuthService {
         );
     }
 
-    // TODO REVOIR LES DATA 
-    register(data: RegisterDto): Promise<any> {
-        return this.usersService.create(data)
+    registerAndLogin(data: RegisterDto): Promise<any> {
+        return this.usersService.createAndLogin(data).then(newUser => {
+            return this.signIn(newUser.email, data.password)
+        })
     }
 }

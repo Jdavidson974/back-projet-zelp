@@ -6,9 +6,13 @@ import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { RegisterDto } from 'src/auth/dto/register.dto';
+import { Ville } from 'src/ville/entities/ville.entity';
 @Injectable()
 export class UsersService {
-  constructor(@InjectRepository(User) private userRepo: Repository<User>) { }
+  constructor(
+    @InjectRepository(User) private userRepo: Repository<User>,
+    @InjectRepository(Ville) private villeRepo: Repository<Ville>
+  ) { }
   createInitAdmin() {
     const email: string = 'jd9743101@gmail.com';
     const password: string = 'Sautronjd974@';
@@ -35,17 +39,21 @@ export class UsersService {
     )
   }
 
-  create(newUser: RegisterDto) {
-    return bcrypt.genSalt().then(
-      salt => {
-        return bcrypt.hash(newUser.password, salt).then(
-          hash => {
-            const user: User = this.userRepo.create({ email: newUser.email, password: hash, lastname: "SAUTRON", firstname: "Jean Davidson", role: "admin" });
-            return this.userRepo.save(user);
+  createAndLogin(newUser: RegisterDto) {
+    return this.villeRepo.findOneByOrFail({ id: +newUser.ville }).then(
+      ville => {
+        return bcrypt.genSalt().then(
+          salt => {
+            return bcrypt.hash(newUser.password, salt).then(
+              hash => {
+                const user: User = this.userRepo.create({ ...newUser, ville: ville, password: hash });
+                return this.userRepo.save(user)
+              }
+            )
           }
-        )
+        );
       }
-    );
+    )
   }
 
   createInitUser() {
